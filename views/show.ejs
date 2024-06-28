@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= recipe.title %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container3">
+        <img src="<%= recipe.image %>" alt="<%= recipe.title %>">
+        <h2><%= recipe.title %></h2>
+        <p><%= recipe.description %></p>
+        <h3>Ingredients</h3>
+        <ul>
+            <% if (Array.isArray(recipe.ingredients)) {
+                recipe.ingredients.forEach(ingredient => { %>
+                    <li><%= ingredient.trim() %></li>
+                <% });
+            } else if (typeof recipe.ingredients === 'string') {
+                recipe.ingredients.split(',').forEach(ingredient => { %>
+                    <li><%= ingredient.trim() %></li>
+                <% });
+            } else {
+                %><li><%= recipe.ingredients %></li><%
+            } %>
+        </ul>
+        <h3>Instructions</h3>
+        <ol>
+            <% recipe.instructions.forEach(instruction => { %>
+                <li><%= instruction.trim() %></li>
+            <% }); %>
+        </ol>
+        <a class="back-button" href="/recipes">Back to Recipes</a>
+    </div>
+</body>
+</html>
